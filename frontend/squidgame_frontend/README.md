@@ -1,70 +1,92 @@
-# Getting Started with Create React App
+Squid Game TV Show Website
+Overview
+This is a React and Django REST Framework based website that showcases the popular TV show, Squid Game. The website includes:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A Home Page with a list of episodes and a search bar to easily find episodes.
+A Cast Page that displays detailed information about the cast.
+Individual Episode Pages that contain episode overviews, telecast dates, and user comments.
+The website is designed to provide a clean, modern, and aesthetic look with a dark theme.
 
-## Available Scripts
+Features
+Home Page:
 
-In the project directory, you can run:
+Lists all episodes with their title, overview, telecast date, and image.
+Includes a search bar to quickly find specific episodes.
+Each episode links to its own detailed page.
+Cast Page:
 
-### `npm start`
+Displays cast members' names, profiles, and descriptions.
+Episode Pages:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Provides an overview of the episode.
+Displays the telecast date.
+Allows users to post and view comments about the episode.
+Technologies Used
+Frontend: React.js
+Axios for API requests.
+CSS for styling with a glassy and modern aesthetic touch.
+Backend: Django and Django REST Framework
+Models: Episode, Cast, Comment.
+API Views: To fetch and create episodes, cast, and comments.
+Database: SQLite (default Django database)
+Models
+Episode
+title: CharField (max_length=255) - The episode's title.
+about: TextField - A brief overview of the episode.
+telecast_date: DateField - The episode's air date.
+image: ImageField (optional) - The episode's image.
+Cast
+name: CharField (max_length=100) - The cast member's name.
+profile: URLField - The URL to the cast member's profile.
+description: TextField - A description of the cast member.
+Comment
+episode: ForeignKey (Episode) - The episode associated with the comment.
+comment_name: CharField (max_length=100) - Name of the commenter.
+content: TextField - The content of the comment.
+comment_date: DateTimeField - The date the comment was posted.
+API Endpoints
+Episodes
+GET /episodes/: Fetch all episodes.
+GET /episodes/:id/: Fetch a single episode by ID.
+POST /episodes/: Create a new episode (Admin feature).
+PUT /episodes/:id/: Update an episode (Admin feature).
+DELETE /episodes/:id/: Delete an episode (Admin feature).
+Cast
+GET /cast/: Fetch all cast members.
+Comments
+GET /episodes/:id/comments/: Fetch comments for an episode.
+POST /episodes/:id/comments/: Add a new comment to an episode.
+Installation Instructions
+Clone the repository:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+bash
+Copy code
+git clone https://github.com/your-username/squid-game-website.git
+Install dependencies:
 
-### `npm test`
+Backend (Django):
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+bash
+Copy code
+cd backend
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py runserver
+Frontend (React):
 
-### `npm run build`
+bash
+Copy code
+cd frontend
+npm install
+npm start
+Run the Django development server at http://localhost:8000/ and the React development server at http://localhost:3000/.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Hosting
+The website is hosted on PythonAnywhere for the backend (Django) and the frontend (React). Visit the live site at: your-live-site-url
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Future Improvements
+Add pagination for episodes and cast members.
+Implement authentication for posting comments.
+Improve episode filtering based on telecast date or title.
+License
+This project is open-source and available under the MIT License. Feel free to contribute and enhance it further!
