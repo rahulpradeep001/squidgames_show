@@ -24,13 +24,7 @@ The website is designed to provide a clean, modern, and aesthetic look with a da
 
 ## Technologies Used
 - **Frontend**: React.js
-  - **Axios** for API requests.
-  - **CSS** for styling with a glassy and modern aesthetic touch.
-  
 - **Backend**: Django and Django REST Framework
-  - **Models**: Episode, Cast, Comment.
-  - **API Views**: To fetch and create episodes, cast, and comments.
-  
 - **Database**: SQLite (default Django database)
 
 ## Models
@@ -50,22 +44,6 @@ The website is designed to provide a clean, modern, and aesthetic look with a da
 - `comment_name`: CharField (max_length=100) - Name of the commenter.
 - `content`: TextField - The content of the comment.
 - `comment_date`: DateTimeField - The date the comment was posted.
-
-## API Endpoints
-
-### Episodes
-- `GET /episodes/`: Fetch all episodes.
-- `GET /episodes/:id/`: Fetch a single episode by ID.
-- `POST /episodes/`: Create a new episode (Admin feature).
-- `PUT /episodes/:id/`: Update an episode (Admin feature).
-- `DELETE /episodes/:id/`: Delete an episode (Admin feature).
-
-### Cast
-- `GET /cast/`: Fetch all cast members.
-
-### Comments
-- `GET /episodes/:id/comments/`: Fetch comments for an episode.
-- `POST /episodes/:id/comments/`: Add a new comment to an episode.
 
 ## Installation Instructions
 1. Clone the repository:
@@ -92,12 +70,4 @@ The website is designed to provide a clean, modern, and aesthetic look with a da
 3. Run the Django development server at `http://localhost:8000/` and the React development server at `http://localhost:3000/`.
 
 ## Hosting
-The website is hosted on **PythonAnywhere** for the backend (Django) and the frontend (React). Visit the live site at: `your-live-site-url`
-
-## Future Improvements
-- Add pagination for episodes and cast members.
-- Implement authentication for posting comments.
-- Improve episode filtering based on telecast date or title.
-
-## License
-This project is open-source and available under the MIT License. Feel free to contribute and enhance it further!
+Visit the live site at: `https://squidgames-seven.vercel.app/`
