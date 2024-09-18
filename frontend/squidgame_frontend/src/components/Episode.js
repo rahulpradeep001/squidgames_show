@@ -13,11 +13,11 @@ const EpisodeDetail = () => {
     useEffect(() => {
         const fetchEpisodeData = async () => {
             try {
-                const episodeResponse = await fetch(`http://127.0.0.1:8000/api/episodes/${id}/`);
+                const episodeResponse = await fetch(`https://rahulpradeepkumar.pythonanywhere.com/api/episodes/${id}/`);
                 const episodeData = await episodeResponse.json();
                 setEpisode(episodeData);
 
-                const commentsResponse = await fetch(`http://127.0.0.1:8000/api/episodes/${id}/comments/`);
+                const commentsResponse = await fetch(`https://rahulpradeepkumar.pythonanywhere.com/api/episodes/${id}/comments/`);
                 const commentsData = await commentsResponse.json();
                 setComments(commentsData);
             } catch (error) {
@@ -41,7 +41,7 @@ const EpisodeDetail = () => {
     const handleCommentSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await fetch(`http://127.0.0.1:8000/api/episodes/${id}/comments/`, {
+            const response = await fetch(`https://rahulpradeepkumar.pythonanywhere.com/api/episodes/${id}/comments/`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

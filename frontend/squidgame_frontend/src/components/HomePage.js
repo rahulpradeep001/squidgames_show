@@ -8,7 +8,7 @@ const HomePage = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/api/episodes/')
+        fetch('https://rahulpradeepkumar.pythonanywhere.com/api/episodes/')
             .then(response => response.json())
             .then(data => setEpisodes(data))
             .catch(error => console.error('Error fetching episodes:', error));
@@ -42,7 +42,7 @@ const HomePage = () => {
                     <h2>Welcome to the World of Squid Game</h2>
                     <p>Explore each episode and dive into the gripping drama.</p>
                 </div>
-                <img src="http://127.0.0.1:8000/episode_images/83699e7a8bb93272b8e52c4947b8f25de7-SquidGame-Unit-107-35639.2x.rsocial.w600.webp" alt="Squid Game" className="hero-image" />
+                <img src="https://variety.com/wp-content/uploads/2021/10/Squid-Game-Netflix.jpg" alt="Squid Game" className="hero-image" />
             </section>
             <section className="search-section">
                 <input
