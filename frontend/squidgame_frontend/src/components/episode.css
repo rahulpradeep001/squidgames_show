@@ -1,0 +1,140 @@
+/* General Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #0f0f0f; /* Dark background */
+    color: #e0e0e0; /* Light text color */
+    margin: 0;
+    padding: 0;
+}
+
+/* Title Bar */
+.title-bar {
+    background: rgba(0, 0, 0, 0.7); /* Dark background */
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.title-bar h1 {
+    color: #e0e0e0;
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 10px 0;
+    margin: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.nav-link {
+    color: #e0e0e0;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #f44786; /* Light Pink */
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    height: 400px;
+    color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    padding: 20px;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.7); /* Glass effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Neumorphism shadow */
+}
+
+.hero-content {
+    background: rgba(0, 0, 0, 0.7); /* Darker overlay */
+    padding: 20px;
+    border-radius: 12px;
+    max-width: 80%;
+}
+
+.hero-content h2 {
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+}
+
+/* Comments Section */
+.comments-section {
+    padding: 20px;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.7); /* Glass effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.comments-list {
+    list-style: none;
+    padding: 0;
+}
+
+.comment-item {
+    background: rgba(0, 0, 0, 0.8);
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.comment-form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.comment-form input {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1); /* Glass effect */
+    color: #e0e0e0;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    resize: none;
+}
+
+.comment-form textarea {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1); /* Glass effect */
+    color: #e0e0e0;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    resize: none;
+}
+
+.comment-form button {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    background-color: #f44786; /* Light Pink */
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.comment-form button:hover {
+    background-color: #e03c6c; /* Darker Pink */
+}

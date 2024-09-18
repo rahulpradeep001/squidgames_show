@@ -1,0 +1,95 @@
+/* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #121212; /* Dark background */
+    color: #e0e0e0; /* Light text color */
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Title Bar */
+.title-bar {
+    padding: 20px;
+    text-align: center;
+}
+
+.title-bar h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    color: #ffffff;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.8); /* Dark background with transparency */
+    padding: 15px;
+}
+
+.nav-link, .nav-button {
+    color: #ffffff;
+    margin: 0 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.nav-link:hover, .nav-button:hover {
+    color: #f44786; /* Light Pink */
+}
+
+.nav-button {
+    background: none;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 50px;
+    background: linear-gradient(145deg, #249f9c, #037a76); /* Teal gradient */
+}
+
+/* Cast List Section */
+.cast-list-section {
+    padding: 30px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1); /* Glass effect */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Neumorphism shadow */
+    margin: 20px;
+}
+
+.cast-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.cast-card {
+    background: rgba(255, 255, 255, 0.2); /* Glass effect */
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Neumorphism shadow */
+    text-align: center;
+    width: 200px;
+}
+
+.cast-image {
+    max-width: 100%;
+    border-radius: 12px;
+    border: 4px solid rgba(255, 255, 255, 0.2);
+}
+
+.cast-info h2 {
+    font-size: 1.2rem;
+    margin: 10px 0 5px;
+}
+
+.cast-info p {
+    font-size: 1rem;
+    color: #999;
+}
