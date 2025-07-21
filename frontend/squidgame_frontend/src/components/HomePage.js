@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { API_ENDPOINTS } from '../config';
 import './HomePage.css';
 
 const HomePage = () => {
@@ -8,10 +9,21 @@ const HomePage = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch('https://rahulpradeepkumar.pythonanywhere.com/api/episodes/')
-            .then(response => response.json())
-            .then(data => setEpisodes(data))
-            .catch(error => console.error('Error fetching episodes:', error));
+        const fetchEpisodes = async () => {
+            try {
+                const response = await fetch(API_ENDPOINTS.EPISODES);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                setEpisodes(data);
+            } catch (error) {
+                console.error('Error fetching episodes:', error);
+                setEpisodes([]); // Set empty array as fallback
+            }
+        };
+        
+        fetchEpisodes();
     }, []);
 
     const handleSearch = (event) => {

@@ -1,12 +1,8 @@
-from rest_framework import generics
-from rest_framework import viewsets
-from .models import Episode, Cast, Comment
-from .serializers import EpisodeSerializer, CastSerializer, CommentSerializer
-# Django example using Django REST Framework
-from rest_framework import serializers, viewsets, status
+from rest_framework import generics, viewsets, status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .models import Comment
+from .models import Episode, Cast, Comment
+from .serializers import EpisodeSerializer, CastSerializer, CommentSerializer
 
 # Episode List and Detail Views
 class EpisodeList(generics.ListCreateAPIView):
