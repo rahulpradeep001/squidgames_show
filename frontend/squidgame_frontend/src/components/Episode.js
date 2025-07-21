@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { API_ENDPOINTS } from '../config';
 import './episode.css'; // Import the updated CSS file
 
 const EpisodeDetail = () => {
@@ -13,15 +14,23 @@ const EpisodeDetail = () => {
     useEffect(() => {
         const fetchEpisodeData = async () => {
             try {
-                const episodeResponse = await fetch(`https://rahulpradeepkumar.pythonanywhere.com/api/episodes/${id}/`);
+                const episodeResponse = await fetch(API_ENDPOINTS.EPISODE_DETAIL(id));
+                if (!episodeResponse.ok) {
+                    throw new Error(`Failed to fetch episode: ${episodeResponse.status}`);
+                }
                 const episodeData = await episodeResponse.json();
                 setEpisode(episodeData);
 
-                const commentsResponse = await fetch(`https://rahulpradeepkumar.pythonanywhere.com/api/episodes/${id}/comments/`);
+                const commentsResponse = await fetch(API_ENDPOINTS.EPISODE_COMMENTS(id));
+                if (!commentsResponse.ok) {
+                    throw new Error(`Failed to fetch comments: ${commentsResponse.status}`);
+                }
                 const commentsData = await commentsResponse.json();
                 setComments(commentsData);
             } catch (error) {
                 console.error('Error fetching episode data:', error);
+                setEpisode(null);
+                setComments([]);
             } finally {
                 setLoading(false);
             }
@@ -41,7 +50,7 @@ const EpisodeDetail = () => {
     const handleCommentSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await fetch(`https://rahulpradeepkumar.pythonanywhere.com/api/episodes/${id}/comments/`, {
+            const response = await fetch(API_ENDPOINTS.EPISODE_COMMENTS(id), {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -49,12 +58,18 @@ const EpisodeDetail = () => {
                     comment_name: commentName, // Send the user's name
                 }),
             });
+            
+            if (!response.ok) {
+                throw new Error(`Failed to post comment: ${response.status}`);
+            }
+            
             const newCommentData = await response.json();
             setComments([...comments, newCommentData]);
             setNewComment('');
             setCommentName(''); // Reset the name field
         } catch (error) {
             console.error('Error posting comment:', error);
+            alert('Failed to post comment. Please try again.');
         }
     };
 

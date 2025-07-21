@@ -21,13 +21,17 @@ class Cast(models.Model):
 
 
 class Comment(models.Model):
-    episode = models.ForeignKey('Episode', on_delete=models.CASCADE, related_name='comments')
-    comment_name = models.CharField(max_length=100)
+    episode = models.ForeignKey('Episode', on_delete=models.CASCADE, related_name='comments', db_index=True)
+    comment_name = models.CharField(max_length=100, db_index=True)
     content = models.TextField()
-    comment_date = models.DateTimeField(auto_now_add=True)
+    comment_date = models.DateTimeField(auto_now_add=True, db_index=True)
+
+    class Meta:
+        ordering = ['-comment_date']
+        indexes = [
+            models.Index(fields=['episode', '-comment_date']),
+        ]
 
     def __str__(self):
         return self.content[:20]  # Display part of the comment
-
-
 
