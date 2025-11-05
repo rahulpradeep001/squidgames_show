@@ -1,17 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import config from '../config';
 import './HomePage.css';
 
 const HomePage = () => {
     const [episodes, setEpisodes] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch('https://rahulpradeepkumar.pythonanywhere.com/api/episodes/')
-            .then(response => response.json())
-            .then(data => setEpisodes(data))
-            .catch(error => console.error('Error fetching episodes:', error));
+        const fetchEpisodes = async () => {
+            try {
+                setLoading(true);
+                setError(null);
+                const response = await fetch(`${config.API_URL}/episodes/`);
+
+                if (!response.ok) {
+                    throw new Error(`Failed to load episodes: ${response.statusText}`);
+                }
+
+                const data = await response.json();
+                setEpisodes(data);
+            } catch (error) {
+                console.error('Error fetching episodes:', error);
+                setError(error.message || 'Failed to load episodes. Please try again later.');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchEpisodes();
     }, []);
 
     const handleSearch = (event) => {
@@ -26,6 +46,26 @@ const HomePage = () => {
     const handleEpisodeClick = (episodeId) => {
         navigate(`/episodes/${episodeId}`);
     };
+
+    if (loading) {
+        return (
+            <div className="homepage">
+                <div className="loading">Loading episodes...</div>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="homepage">
+                <div className="error-message">
+                    <h3>Error</h3>
+                    <p>{error}</p>
+                    <button onClick={() => window.location.reload()}>Retry</button>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="homepage">
@@ -55,21 +95,25 @@ const HomePage = () => {
             </section>
             <section className="episode-list-section">
                 <h3>Episodes</h3>
-                <div id="ep" className="episode-cards">
-                    {filteredEpisodes.map(episode => (
-                        <div
-                            key={episode.id}
-                            className="episode-card"
-                            onClick={() => handleEpisodeClick(episode.id)}
-                        >
-                            <img src={episode.image} alt={episode.title} className="episode-card-image" />
-                            <div className="episode-card-info">
-                                <h4>{episode.title}</h4>
-                                <p>{episode.about}</p>
+                {filteredEpisodes.length === 0 ? (
+                    <p className="no-results">No episodes found matching your search.</p>
+                ) : (
+                    <div id="ep" className="episode-cards">
+                        {filteredEpisodes.map(episode => (
+                            <div
+                                key={episode.id}
+                                className="episode-card"
+                                onClick={() => handleEpisodeClick(episode.id)}
+                            >
+                                <img src={episode.image} alt={episode.title} className="episode-card-image" />
+                                <div className="episode-card-info">
+                                    <h4>{episode.title}</h4>
+                                    <p>{episode.about}</p>
+                                </div>
                             </div>
-                        </div>
-                    ))}
-                </div>
+                        ))}
+                    </div>
+                )}
             </section>
         </div>
     );

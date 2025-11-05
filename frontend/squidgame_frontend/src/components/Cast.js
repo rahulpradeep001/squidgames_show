@@ -1,23 +1,56 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import './cast.css'; // Import the CSS file for styling
+import config from '../config';
+import './cast.css';
 
 const Cast = () => {
     const [cast, setCast] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchCast = async () => {
             try {
-                const response = await axios.get('https://rahulpradeepkumar.pythonanywhere.com/api/cast/');
-                console.log('Fetched cast data:', response.data);
-                setCast(response.data);
+                setLoading(true);
+                setError(null);
+
+                const response = await fetch(`${config.API_URL}/cast/`);
+                if (!response.ok) {
+                    throw new Error(`Failed to load cast: ${response.statusText}`);
+                }
+
+                const data = await response.json();
+                console.log('Fetched cast data:', data);
+                setCast(data);
             } catch (error) {
                 console.error('Error fetching cast:', error);
+                setError(error.message || 'Failed to load cast. Please try again later.');
+            } finally {
+                setLoading(false);
             }
         };
 
         fetchCast();
     }, []);
+
+    if (loading) {
+        return (
+            <div className="cast-page">
+                <div className="loading">Loading cast...</div>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="cast-page">
+                <div className="error-message">
+                    <h3>Error</h3>
+                    <p>{error}</p>
+                    <button onClick={() => window.location.reload()}>Retry</button>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="cast-page">
@@ -30,25 +63,29 @@ const Cast = () => {
                 <a href="/cast" className="nav-link">Cast</a>
             </nav>
             <section className="cast-list-section">
-                <ul className="cast-list">
-                    {cast.length > 0 ? (
-                        cast.map((castMember) => (
+                {cast.length > 0 ? (
+                    <ul className="cast-list">
+                        {cast.map((castMember) => (
                             <li key={castMember.id} className="cast-card">
-                                {/* Log the profile image URL to the console */}
-                                {console.log('Image URL:', castMember.profile)}
-
-                                {/* Render the image and cast info */}
-                                <img src={castMember.profile} alt={castMember.name} className="cast-image" />
+                                <img
+                                    src={castMember.profile}
+                                    alt={castMember.name}
+                                    className="cast-image"
+                                    onError={(e) => {
+                                        e.target.onerror = null;
+                                        e.target.src = 'https://via.placeholder.com/300x400?text=No+Image';
+                                    }}
+                                />
                                 <div className="cast-info">
                                     <h2>{castMember.name}</h2>
                                     <p>{castMember.description}</p>
                                 </div>
                             </li>
-                        ))
-                    ) : (
-                        <p>Cast members data not found.</p>
-                    )}
-                </ul>
+                        ))}
+                    </ul>
+                ) : (
+                    <p className="no-results">No cast members found.</p>
+                )}
             </section>
         </div>
     );
